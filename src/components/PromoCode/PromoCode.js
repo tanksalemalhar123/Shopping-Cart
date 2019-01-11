@@ -1,15 +1,23 @@
 import React,{Component} from 'react';
 import {Button,Collapse,Well,Form,Row,Col,FormGroup,FormControl,ControlLabel} from 'react-bootstrap';
 
+import {connect} from 'react-redux';
+import {handleChange} from '../../actions/promoCodeActions';
+
 class PromoCode extends Component{
     constructor(props){
         super(props);
 
         this.state={
             open: false,
-            value: ''
+           
         }
     }
+
+    handleChange = e =>{
+        this.props.handleChange(e);
+    };
+    
     render(){
         return(
             <div>
@@ -50,5 +58,8 @@ class PromoCode extends Component{
         );
     }
 }
+const mapStateToProps = state =>({
+    promoCode: state.promoCode.value
+})
 
-export default PromoCode;
+export default connect(mapStateToProps,{handleChange})(PromoCode);
